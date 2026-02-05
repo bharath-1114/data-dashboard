@@ -79,8 +79,14 @@
   function chatbotReply(question) {
     question = question.toLowerCase();
 
+    if (hasAny(question, ["upload", "file upload", "upload file", "csv", "import file"])) {
+      location.hash = "upload";
+      return "Please upload your file in the Upload page.";
+    }
+
     if (!window.ChatbotKnowledge) {
-      return "Please upload a dataset first.";
+      location.hash = "upload";
+      return "Please upload your file in the Upload page.";
     }
 
     /* GREETING */
