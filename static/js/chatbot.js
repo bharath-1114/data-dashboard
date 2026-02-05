@@ -52,6 +52,16 @@
   function hasAny(q, words) {
     return words.some(w => q.includes(w));
   }
+  function getChatbotMode() {
+    const modeFromWindow = String(window.ChatbotMode || "").toLowerCase();
+    if (modeFromWindow) return modeFromWindow;
+
+    const modeFromDataset = String(document.body?.dataset?.chatMode || "").toLowerCase();
+    if (modeFromDataset) return modeFromDataset;
+
+    return String(localStorage.getItem("chatbotMode") || "chat").toLowerCase();
+  }
+
 
   /* ===============================
      BOT RESULT RESET
@@ -79,23 +89,27 @@
   function chatbotReply(question) {
     question = question.toLowerCase();
 
-    if (hasAny(question, ["upload", "file upload", "upload file", "csv", "import file"])) {
-      location.hash = "upload";
-      return "Please upload your file in the Upload page.";
-    }
-
-    if (!window.ChatbotKnowledge) {
-      location.hash = "upload";
-      return "Please upload your file in the Upload page.";
-    }
+    const fileUploaded = !!window.ChatbotKnowledge?.columns?.length;
+    const chatbotMode = getChatbotMode();
+    const isFileUploadMode = chatbotMode === "file" || chatbotMode === "file-upload";
 
     /* GREETING */
     if (hasAny(question, ["hi", "hello", "hey"])) {
       return "Hello 👋 Ask about attendance, marks, gender or results.";
     }
 
+    if (isFileUploadMode && !fileUploaded) {
+      return "Please upload file";
+    }
+
+    if (hasAny(question, ["upload", "file upload", "upload file", "csv", "import file"])) {
+      location.hash = "upload";
+      return "Please upload your file in the Upload page.";
+    }
+
     /* GENDER */
     if (hasAny(question, ["gender", "male", "female"])) {
+      if (!fileUploaded) return "Please upload file";
       const ctx = clearBotResult();
       Table.renderDashboard();
       Charting.renderGenderChartsAuto(ctx.chartGrid);
@@ -104,6 +118,7 @@
 
     /* MARKS */
     if (hasAny(question, ["mark", "marks", "score", "percentage"])) {
+      if (!fileUploaded) return "Please upload file";
       const ctx = clearBotResult();
 
       if (hasAny(question, ["low", "poor"])) {
@@ -123,6 +138,7 @@
 
     /* ATTENDANCE */
     if (hasAny(question, ["attend","attendance", "present"])) {
+      if (!fileUploaded) return "Please upload file";
       const ctx = clearBotResult();
 
       if (hasAny(question, ["low", "poor"])) {
@@ -142,6 +158,7 @@
 
     /* RESULT */
     if (hasAny(question, ["result", "pass", "fail"])) {
+      if (!fileUploaded) return "Please upload file";
       const ctx = clearBotResult();
       Table.renderDashboard();
       Charting.renderResultChartsAuto(ctx.chartGrid);

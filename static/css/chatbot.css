@@ -70,9 +70,6 @@
 } 
 
 
-
-
-
 /* ===============================
    RIGHT: CHAT PANEL
 =============================== */
@@ -195,17 +192,3 @@
   50% { height: 16px; }
 }
 
-
-/* === DEBUG OUTLINE (TEMP) === */
-/* .panel {
-  outline: 2px solid rgb(163, 9, 247);
-}
-
-#pageCharts {
-  outline: 2px solid blue;
-}
-
-.chartpanel {
-  outline: 2px solid green;
-  min-height: 260px !important;
-} */
