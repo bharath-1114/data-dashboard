@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pyc
+.env
+.vscode/
+node_modules/
+firebase-debug.log
+uploads/last_upload.json
+uploads/last_upload.pkl

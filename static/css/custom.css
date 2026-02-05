@@ -1,0 +1,396 @@
+/* =========================================================
+   CUSTOM PAGE
+========================================================= */
+#customContainer{
+  /* background-color: #2188fd; */
+  height: 100%;
+  width: 100%;
+  position: relative;
+  min-height: 80vh;
+  overflow: visible;
+}
+
+/* Base panel */
+.panel,.chartpanel {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 14px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.chartpanel {
+  position: relative; 
+}
+
+/* Selected feedback */
+.chartpanel.selected,
+.panel.selected {
+  background-color: #eef5ff;
+  border-color: #2563eb;
+}
+
+
+/* Custom page layout */
+.custom-grid {
+  height: 100vh;
+  width: 100%;
+  background-color: #6b7280;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 18px;
+}
+/* .custom-grid .panel {
+  background-color: #c4350a;
+} */
+
+
+/* remove button visible only in custom page */
+#customContainer .remove-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  color: #6b7280;
+  margin-left: 8px;
+}
+
+#customContainer .remove-btn:hover {
+  color: #ef4444;
+}
+/* Custom page becomes a drawing canvas */
+
+
+.custom-card {
+  position: absolute;
+  cursor: grab;
+  user-select: none;
+  overflow: visible;   
+  max-width: none;   
+  max-height: none;
+  background-color: #000;
+}
+
+
+.custom-card.dragging {
+  cursor: grabbing;
+  opacity: 0.85;
+  z-index: 9999;
+}
+.custom-card {
+  font-size: 14px;
+}
+
+/* user can override via UI later */
+
+/* resize handle */
+.custom-card .resize-handle {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 14px;
+  height: 14px;
+  /* cursor: nwse-resize; */
+  background: rgba(0,0,0,0.3);
+  border-radius: 3px;
+}
+.simple-table {
+  width: 100%;
+  table-layout: auto;
+}
+
+.simple-table td,
+.simple-table th {
+  white-space: normal; 
+  word-break: break-word;
+}
+/* Custom table card */
+.custom-card.table-card {
+  height: auto;
+  max-height: none;
+}
+
+/* Table itself */
+.custom-card.table-card table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* Prevent overflow */
+.custom-card.table-card {
+  overflow: hidden;
+}
+/* Chart card */
+.custom-card.chart-card {
+  height: 320px;         
+  min-height: 320px;
+  max-height: 320px;
+}
+
+/* Chart canvas fills width only */
+.custom-card.chart-card canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.custom-card.table-card {
+  overflow: hidden;    
+}
+
+.custom-card.table-card table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.custom-card.table-card .resize-handle {
+  cursor: ew-resize;     
+}
+/* Canvas */
+#customContainer {
+  position: relative;
+  min-height: 80vh;
+  overflow: visible;
+}
+
+/* Movable + resizable cards */
+.custom-card {
+  position: absolute;
+  overflow: visible;
+  max-width: none;
+  max-height: none;
+  min-width: 40px;   
+  min-height: 30px;    
+}
+
+/* Resize handle */
+.custom-card .resize-handle {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 12px;
+  height: 12px;
+  cursor: nwse-resize;
+  background: rgba(0,0,0,0.35);
+  border-radius: 2px;
+}
+
+/* ===========================
+ A4 PAGE SYSTEM
+=========================== */
+
+.a4-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+/* A4 PAGE */
+/* A4 Page Base */
+.a4-page {
+  width: 210mm;
+  height: 300mm;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  position: relative;
+  overflow: hidden;  
+  page-break-after: always;
+}
+.a4-page {
+  border: 2px solid transparent;
+  transition: 0.2s;
+}
+
+.a4-page.active-print-page {
+  border: 1px solid #2563eb;
+  box-shadow: 0 0 12px rgba(37,99,235,0.4);
+}
+
+/* Landscape mode */
+.a4-page.landscape {
+  width: 297mm;
+  height: 210mm;
+}
+
+/* Header & Footer */
+.a4-header{
+  height: 10mm;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  font-weight: 500;
+  font-size: 14px;
+  background: #f0f1f2;
+  padding: 2mm;
+}
+/* .a4-header, */
+.a4-footer {
+  height: 10mm;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  font-weight: 500;
+  font-size: 14px;
+  background: #f3f4f6;
+  padding: 2mm;
+}
+/* Canvas Area */
+.a4-canvas {
+  position: relative;
+  height: calc(100% - 20mm);
+  width: 100%;
+  overflow: hidden; 
+  background: #ffffff;
+}
+/* PAGE CONTROLS */
+.page-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 12px;
+  margin: 20px;
+}
+.btn-danger:hover{
+  background-color: #f66565;
+  border: 1px solid #343536;
+  color: #ffffff;
+}
+.btn-secondary:hover{
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  border: 1px solid #343536;
+  color: white;
+}
+/* ===========================
+   CUSTOM CARDS
+=========================== */
+
+.custom-card {
+  position: absolute;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: grab;
+}
+
+.custom-card.dragging {
+  cursor: grabbing;
+  opacity: 0.85;
+  z-index: 9999;
+}
+
+.custom-card .resize-handle {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 12px;
+  height: 12px;
+  background: rgba(0,0,0,0.35);
+  cursor: nwse-resize;
+}
+
+/* ===========================
+   PRINT
+=========================== */
+
+/* ===========================
+   FORCE TRUE A4 PRINT
+=========================== */
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: none;
+    background: white;
+  }
+
+  .page-controls {
+    display: none !important;
+  }
+
+  .a4-wrapper {
+    margin: 0;
+    padding: 0;
+  }
+
+  .a4-page {
+    margin: 0 auto;
+    border: none;
+    display: block !important;
+    visibility: visible !important;
+    box-shadow: none;
+    margin: 0;
+    page-break-after: always;
+  }
+
+  .a4-page * {
+    visibility: visible !important;
+  }
+
+  .a4-canvas {
+    overflow: visible !important;
+  }
+
+  .a4-page.landscape {
+    width: 297mm;
+    height: 210mm;
+    transform: rotate(90deg);
+    transform-origin: center;
+  }
+
+  nav,
+  .navbar,
+  .sidebar,
+  .side-menu,
+  .topbar,
+  .page-controls,
+  header,
+  footer {
+    display: none !important;
+  }
+  table {
+    width: 100% !important;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border: 1px solid #000;
+    color: black !important;
+  }
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  body.print-landscape {
+    transform: rotate(0);
+  }
+
+  body.print-landscape .a4-page.landscape {
+    page-break-after: always;
+  }
+
+  @page {
+    size: A4 landscape;
+    margin: 10mm;
+  }
+}
+
+
+@media print {
+  .a4-page {
+    outline: 2px solid red;
+  }
+}

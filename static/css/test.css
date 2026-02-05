@@ -1,0 +1,98 @@
+/* =========================================================
+   CUSTOM PAGE
+========================================================= */
+
+#customContainer {
+  position: relative;
+  min-height: 80vh;
+  min-width: 80vw;
+  overflow: visible;
+}
+ 
+
+  
+
+  
+  
+
+  
+  
+  /* remove button visible only in custom page */
+  #customContainer .remove-btn {
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    cursor: pointer;
+    color: #6b7280;
+    margin-left: 8px;
+  }
+  
+  #customContainer .remove-btn:hover {
+    color: #ef4444;
+  }
+  /* Custom page becomes a drawing canvas */
+
+  .chartpanel .remove-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: none;
+  background-color: #000000;
+  /* background: transparent; */
+  font-size: 14px;
+  cursor: pointer;
+  color: #294d96;
+  z-index: 10;
+}
+
+.chartpanel .remove-btn:hover {
+  color: #ef4444;
+}
+
+  /* Custom canvas */
+
+  
+  /* Custom cards */
+
+  
+
+  
+  /* user can override via UI later */
+  
+  /* resize handle */
+
+  
+
+
+  
+  
+  /* Canvas */
+ 
+  
+  /* Movable + resizable cards
+  .custom-card {
+    position: absolute;
+    overflow: visible;
+    max-width: none;
+    max-height: none;
+    min-width: 40px;     
+    min-height: 30px;  
+  }
+  
+  .custom-card .resize-handle {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    width: 12px;
+    height: 12px;
+    cursor: nwse-resize;
+    background: rgba(0,0,0,0.35);
+    border-radius: 2px;
+  } */
+  
+
+
+
+
+
+

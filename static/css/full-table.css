@@ -1,0 +1,121 @@
+/* ===============================
+   ROOT SCALE (GLOBAL CONTROL)
+================================ */
+:root {
+  --table-font-min: 8px;
+  --table-font-max: 11px;
+  /* --cell-pad-y:clamp(6px, 0.6vw, 8px);
+  --cell-pad-x: clamp(8px, 1vw, 12px); */
+  --cell-pad-y:3px;
+  --cell-pad-x: 6px;
+  --table-border: #e2e2e2;
+  --table-head-bg: #f4f6f8;
+  --table-hover: rgba(0, 140, 255, 0.06);
+}
+.hidden {
+  display: none !important;
+}
+
+/* ===============================
+   PAGE CONTAINER
+================================ */
+#pageFulltable {
+  width: 100%;
+  max-width: 100%;
+  padding: clamp(0.4rem, 1vw, 1rem);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* ===============================
+   TABLE BLOCK
+================================ */
+.table-block {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* ===============================
+   TABLE WRAPPER (FULL CONTROL)
+================================ */
+.table-wrapper {
+  width: 100%;
+  max-height: 420px;               /* 10 rows approx */
+
+  border-radius: 10px;
+  border: 1px solid var(--table-border);
+  background: #fff;
+}
+
+/* ===============================
+   TABLE CORE
+================================ */
+.table-wrapper table {
+  width: 100%;
+  min-width: 720px;                /* keeps structure */
+  border-collapse: collapse;
+  table-layout: fixed;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+/* ===============================
+   CELLS
+================================ */
+.table-wrapper th,
+.table-wrapper td {
+  padding: var(--cell-pad-y) var(--cell-pad-x);
+  font-size: clamp(var(--table-font-min), 0.7vw, var(--table-font-max));
+  color: #333;
+  border-bottom: 1px solid var(--table-border);
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===============================
+   HEADER
+================================ */
+.table-wrapper th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--table-head-bg);
+  font-weight: 600;
+  white-space: normal;
+}
+
+/* ===============================
+   ROW HOVER
+================================ */
+.table-wrapper tbody tr:hover td {
+  background: var(--table-hover);
+}
+
+/* ===============================
+   MOBILE (TABLET)
+================================ */
+@media (max-width: 768px) {
+  .table-wrapper {
+    max-height: 360px;
+  }
+
+  .table-wrapper table {
+    min-width: 600px;
+  }
+}
+
+/* ===============================
+   MOBILE (SMALL DEVICES)
+================================ */
+@media (max-width: 480px) {
+  .table-wrapper {
+    max-height: 300px;
+  }
+
+  .table-wrapper table {
+    min-width: 520px;
+  }
+}
