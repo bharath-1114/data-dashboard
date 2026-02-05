@@ -82,7 +82,7 @@
 
     return { botPanel, chartGrid };
   }
-
+  
   /* ===============================
      CHATBOT INTELLIGENCE
   =============================== */
