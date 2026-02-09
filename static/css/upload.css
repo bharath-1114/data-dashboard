@@ -97,6 +97,7 @@
   background: #f1f5f9;
   padding: 10px;
   border-radius: 10px;
+  white-space: pre-wrap;
 }
 .action-buttons {
   width: 100%;

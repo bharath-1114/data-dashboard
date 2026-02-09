@@ -1,26 +1,36 @@
 // app.js
 
 
-if (localStorage.getItem("hasData") === "true") {
-  document.body.classList.add("has-file");
+// if (localStorage.getItem("hasData") === "true") {
+//   document.body.classList.add("has-file");
+// }
+function hasUploadedData(){
+  return localStorage.getItem("hasData") == "true";
 }
 
+if(hasUploadedData()){
+  document.body.classList.add('has-file');
+}
 
 // ===== GLOBAL STATE =====
-window.isFileUploaded = localStorage.getItem("hasData") === "true";
+// window.isFileUploaded = localStorage.getItem("hasData") === "true";
+window.isFileUploaded = hasUploadedData();
 window.isUploading = false;
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (localStorage.getItem("hasData") === "true") {
-    window.isFileUploaded = true;
-  }
+  // if (localStorage.getItem("hasData") === "true") {
+  //   window.isFileUploaded = true;
+  // }
+  window.isFileUploaded = hasUploadedData();
 });
 
 
 // ===== PAGE STATE HANDLER =====
 function updatePageState(sectionId) {
-  const section = document.getElementById(sectionId);
+  // const section = document.getElementById(sectionId);
+  const section = typeof sectionId === "string" ? document.getElementById(sectionId): sectionId;
   if (!section) return;
+  const sectionKey = section.id;
 
   const emptyState = section.querySelector(".empty-state");
 
@@ -30,18 +40,18 @@ function updatePageState(sectionId) {
     fulltable: "#pageFulltable",
     charts: "#pageCharts",
     custom: "#customPage",
-    chatbot: "#chatarea"
+    chatbot: "#botpage"
   };
 
-  const contentSelector = contentMap[sectionId];
+  const contentSelector = contentMap[sectionKey];
   const content = contentSelector
     ? section.querySelector(contentSelector)
     : null;
 
   // UPLOAD page → skip logic
-  if (sectionId === "upload") return;
+  if (sectionKey === "upload") return;
 
-  if (window.isFileUploaded) {
+  if (hasUploadedData()) {
     emptyState?.classList.add("hidden");
     content?.classList.remove("hidden");
   } else {
@@ -52,7 +62,7 @@ function updatePageState(sectionId) {
   const customEmpty = document.getElementById("customEmptyState");
   const customPage = document.getElementById("customPage");
 
-  if (window.isFileUploaded) {
+  if (hasUploadedData()) {
     customEmpty.classList.add("hidden");
     customPage.classList.remove("hidden");
   } else {
@@ -69,6 +79,16 @@ function updatePageState(sectionId) {
 
 // ===== SHOW SECTION =====
 window.showSection = function (id) {
+  const fileDependentSections = new Set([
+    "table","fulltable","charts","custom",'chatbot'
+  ]);
+  if (!hasUploadedData() && fileDependentSections.has(id)) {
+    // openUpgradeModal();
+    // alert("Please upload a file")
+    return;
+  }
+
+  // Hide all sections (except)
   document.querySelectorAll(".section").forEach(sec => {
     sec.classList.add("hidden");
   });

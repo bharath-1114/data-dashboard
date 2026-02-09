@@ -1,10 +1,16 @@
-student_id,name,class,section,gender,dob,age,subject,marks,total_marks,percentage,attendance,result,fee_status,scholarship,admission_year,email
-STU001,Rahul Sharma,10,A,Male,2025-05-14,15,Maths,87%,100%,87%,92.0%,Pass,Paid,No,2022,rahulsharma@gmail.com
-STU002,Anita Kumari,10,A,Female,2023-05-14,16,Science,0%,100%,0%,88.0%,Pass,Pending,Yes,2021,anitakumari@gmail.com
-STU003,Vikram Rao,10,B,Male,2021-05-14,15,English,65%,100%,65%,100.0%,Pass,Paid,No,2022,vikramrao@gmail.com
-STU004,Meera Singh,10,B,Female,2024-05-14,1,Maths,45%,100%,45%,70.0%,Fail,Pending,No,2021,meerasingh@gmail.com
-STU005,John Peter,9,A,Male,2025-05-14,14,Science,92%,100%,92%,95.0%,Pass,Paid,Yes,2023,johnpeter@gmail.com
-STU006,Sana Ahmed,9,A,Female,2025-05-14,14,English,100%,100%,100%,90.0%,Pass,Paid,No,2023,sanaahmed@gmail.com
-STU008,Kavya Reddy,9,B,Female,2025-05-14,14,Science,71%,100%,71%,100.0%,Pass,Paid,Yes,2022,kavyareddy@gmail.com
-STU009,Manoj Kumar,10,A,Male,2025-05-14,16,English,39%,100%,39%,60.0%,Pass,Pending,No,2021,manojkumar@gmail.com
-STU010,Priya Patel,10,B,Female,2025-05-14,15,Maths,95%,0%,95%,97.0%,Pass,Paid,Yes,2022,priyapatel@gmail.com
+employee_id,name,gender,age,department,role,experience_years,attendance,performance_rating,salary,joining_year,employment_type,email
+E001,Rahul Sharma,Male,29,IT,Software Engineer,5,94.0%,4,65000,1970-01-01,Full-time,rahulsharma@gmail.com
+E002,Priya Singh,Female,27,HR,HR Executive,4,96.0%,5,48000,1970-01-01,Full-time,priyasingh@gmail.com
+E003,Amit Verma,Male,35,Finance,Accountant,10,88.0%,3,72000,1970-01-01,Full-time,amitverma@gmail.com
+E004,Neha Patel,Female,31,Sales,Sales Manager,7,91.0%,4,68000,1970-01-01,Full-time,nehapatel@gmail.com
+E005,Rohan Das,Male,26,IT,Junior Developer,2,85.0%,3,42000,1970-01-01,Contract,rohandas@gmail.com
+E006,Anjali Mehta,Female,34,Operations,Operations Lead,9,93.0%,5,75000,1970-01-01,Full-time,anjalimehta@gmail.com
+E007,Vikram Rao,Male,41,Finance,Finance Manager,15,90.0%,4,98000,1970-01-01,Full-time,vikramrao@gmail.com
+E008,Sneha Iyer,Female,28,IT,UI/UX Designer,4,97.0%,5,60000,1970-01-01,Full-time,snehaiyer@gmail.com
+E009,Arjun Nair,Male,33,Sales,Sales Executive,8,86.0%,3,52000,1970-01-01,Full-time,arjunnair@gmail.com
+E010,Kavya Reddy,Female,25,HR,Recruiter,1,92.0%,4,38000,1970-01-01,Contract,kavyareddy@gmail.com
+E011,Manoj Kumar,Male,38,Operations,Supervisor,12,89.0%,4,68000,1970-01-01,Full-time,manojkumar@gmail.com
+E012,Pooja Malhotra,Female,30,Finance,Financial Analyst,6,95.0%,5,70000,1970-01-01,Full-time,poojamalhotra@gmail.com
+E013,Suresh Babu,Male,45,Operations,Plant Manager,20,87.0%,3,105000,1970-01-01,Full-time,sureshbabu@gmail.com
+E014,Divya Jain,Female,29,Sales,Marketing Analyst,5,93.0%,4,56000,1970-01-01,Full-time,divyajain@gmail.com
+E015,Kiran Joshi,Male,32,IT,System Admin,7,90.0%,4,65000,1970-01-01,Full-time,kiranjoshi@gmail.com

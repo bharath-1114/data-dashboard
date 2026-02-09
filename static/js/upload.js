@@ -118,7 +118,8 @@ async function handleFile(file) {
 
   fileNameEl.textContent = currentFileName;
   fileSizeEl.textContent = (file.size / 1024).toFixed(1) + " KB";
-  dataSummary.textContent = `${json.rows} rows`;
+  // dataSummary.textContent = `${json.rows} rows`;
+  dataSummary.textContent = `File uploaded successfully.\n${json.rows} rows`;
 
   // 🔗 connect to main.js / dashboard
   window.afterUploadSuccess?.(json);
@@ -204,7 +205,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   fileNameEl.textContent = state.filename;
   fileSizeEl.textContent = (state.size / 1024).toFixed(1) + " KB";
-  dataSummary.textContent = `${state.rows} rows`;
+  // dataSummary.textContent = `${state.rows} rows`;
+  dataSummary.textContent = `File uploaded successfully.\n${json.rows} rows`;
 
   window.isFileUploaded = true;
 
@@ -221,4 +223,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Restore failed", err);
   }
 });
-

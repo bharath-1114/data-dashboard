@@ -89,7 +89,8 @@
   function chatbotReply(question) {
     question = question.toLowerCase();
 
-    const fileUploaded = !!window.ChatbotKnowledge?.columns?.length;
+    // const fileUploaded = !!window.ChatbotKnowledge?.columns?.length;
+    const fileUploaded = localStorage.getItem("hasData") == "true";
     const chatbotMode = getChatbotMode();
     const isFileUploadMode = chatbotMode === "file" || chatbotMode === "file-upload";
 
@@ -99,7 +100,7 @@
     }
 
     if (isFileUploadMode && !fileUploaded) {
-      return "Please upload file";
+      return "Please upload a file";
     }
 
     if (hasAny(question, ["upload", "file upload", "upload file", "csv", "import file"])) {
@@ -109,7 +110,7 @@
 
     /* GENDER */
     if (hasAny(question, ["gender", "male", "female"])) {
-      if (!fileUploaded) return "Please upload file";
+      if (!fileUploaded) return "Please upload a file";
       const ctx = clearBotResult();
       Table.renderDashboard();
       Charting.renderGenderChartsAuto(ctx.chartGrid);
@@ -118,7 +119,7 @@
 
     /* MARKS */
     if (hasAny(question, ["mark", "marks", "score", "percentage"])) {
-      if (!fileUploaded) return "Please upload file";
+      if (!fileUploaded) return "Please upload a file";
       const ctx = clearBotResult();
 
       if (hasAny(question, ["low", "poor"])) {
@@ -138,7 +139,7 @@
 
     /* ATTENDANCE */
     if (hasAny(question, ["attend","attendance", "present"])) {
-      if (!fileUploaded) return "Please upload file";
+      if (!fileUploaded) return "Please upload a file";
       const ctx = clearBotResult();
 
       if (hasAny(question, ["low", "poor"])) {
@@ -158,7 +159,7 @@
 
     /* RESULT */
     if (hasAny(question, ["result", "pass", "fail"])) {
-      if (!fileUploaded) return "Please upload file";
+      if (!fileUploaded) return "Please upload a file";
       const ctx = clearBotResult();
       Table.renderDashboard();
       Charting.renderResultChartsAuto(ctx.chartGrid);
