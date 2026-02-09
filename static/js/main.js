@@ -124,7 +124,7 @@
 
     if (hash === 'chatbot') {
       const empty = document.querySelector ('#chatbot .empty-state');
-      const botPage = document.getElementById ('botPage');
+      const botPage = document.getElementById ('botpage');
 
       if (hasUploadedData()) {
         empty?.classList.add('hidden');

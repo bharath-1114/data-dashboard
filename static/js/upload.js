@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   fileNameEl.textContent = state.filename;
   fileSizeEl.textContent = (state.size / 1024).toFixed(1) + " KB";
   // dataSummary.textContent = `${state.rows} rows`;
-  dataSummary.textContent = `File uploaded successfully.\n${json.rows} rows`;
+  dataSummary.textContent = `File uploaded successfully.\n${state.rows} rows`;
 
   window.isFileUploaded = true;
 

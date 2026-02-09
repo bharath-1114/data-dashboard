@@ -78,17 +78,19 @@ function updatePageState(sectionId) {
 
 
 // ===== SHOW SECTION =====
-window.showSection = function (id) {
-  const fileDependentSections = new Set([
-    "table","fulltable","charts","custom",'chatbot'
-  ]);
+window.canAccesssSection = function (id) {
+  const fileDependentSections = new Set(["table","fulltable","charts","custom","chatbot"]);
   if (!hasUploadedData() && fileDependentSections.has(id)) {
     // openUpgradeModal();
     // alert("Please upload a file")
-    return;
+    return
   }
+  return hasUploadedData() || !fileDependentSections.has(id);
+};
 
-  // Hide all sections (except)
+
+function applySection(id) {
+  // Hide all sections 
   document.querySelectorAll(".section").forEach(sec => {
     sec.classList.add("hidden");
   });
@@ -100,7 +102,26 @@ window.showSection = function (id) {
   localStorage.setItem("lastSection", id);
 
   updatePageState(section);
-};
+}
+
+window.showSection = function (id) {
+  if (!window.canAccessSection?.(id)) {
+    // openUpgradeModal();
+    // alert("Please upload a file")
+    if (location.hash.replace("#", "") !== "upload") {
+      location.hash = "upload";
+    }
+    return;
+  }
+
+  if (location.hash.replace("#", "") !== id) {
+    location.hash = id;
+    return;
+  }
+
+  applySection(id);
+}
+
 
 // ===== ROUTER =====
 function handleRoute() {
@@ -108,15 +129,21 @@ function handleRoute() {
     location.hash.replace("#", "") ||
     localStorage.getItem("lastSection") ||
     "upload";
-
-  showSection(section);
+  
+    if (!window.canAccessSection?.(section)) {
+      applySection("upload");
+      return;
+    }
+  
+    applySection(section);
 }
 
 // ===== NAV =====
 document.querySelectorAll(".nav-item").forEach(link => {
   link.addEventListener("click", e => {
     e.preventDefault();
-    location.hash = link.dataset.section;
+    // location.hash = link.dataset.section;
+    showSection(link.dataset.section);
   });
 });
 
