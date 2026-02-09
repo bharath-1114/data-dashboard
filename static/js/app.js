@@ -78,7 +78,7 @@ function updatePageState(sectionId) {
 
 
 // ===== SHOW SECTION =====
-window.canAccesssSection = function (id) {
+window.canAccessSection = function (id) {
   const fileDependentSections = new Set(["table","fulltable","charts","custom","chatbot"]);
   if (!hasUploadedData() && fileDependentSections.has(id)) {
     // openUpgradeModal();

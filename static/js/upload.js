@@ -30,15 +30,17 @@ function hide(el) { el?.classList.add("hidden"); }
 async function handleFile(file) {
   const authUser = JSON.parse(localStorage.getItem("authUser"));
 
-  // 🚫 must be logged in or guest
+  // must be logged in or guest
   if (!authUser) {
     location.href = "/auth.html?mode=login";
     return;
   }
 
-  // 🚫 file validation
-  if (!file.name.toLowerCase().endsWith(".csv")) {
-    alert("Please upload a CSV file");
+  // file validation
+  const allowedExtensions = [".csv", ".json", ".xls", ".xlsx"];
+  const fileExtension = `.${file.name.split(".").pop()}`.toLowerCase();
+  if (!allowedExtensions.includes(fileExtension)) {
+    alert("Please upload a CSV, JSON, or Excel file");
     return;
   }
 
@@ -118,8 +120,9 @@ async function handleFile(file) {
 
   fileNameEl.textContent = currentFileName;
   fileSizeEl.textContent = (file.size / 1024).toFixed(1) + " KB";
-  // dataSummary.textContent = `${json.rows} rows`;
   dataSummary.textContent = `File uploaded successfully.\n${json.rows} rows`;
+
+
 
   // 🔗 connect to main.js / dashboard
   window.afterUploadSuccess?.(json);
@@ -205,8 +208,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   fileNameEl.textContent = state.filename;
   fileSizeEl.textContent = (state.size / 1024).toFixed(1) + " KB";
-  // dataSummary.textContent = `${state.rows} rows`;
   dataSummary.textContent = `File uploaded successfully.\n${state.rows} rows`;
+
 
   window.isFileUploaded = true;
 
@@ -222,4 +225,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (err) {
     console.error("Restore failed", err);
   }
+
 });

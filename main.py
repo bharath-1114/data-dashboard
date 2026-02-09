@@ -8,6 +8,7 @@ from fastapi.staticfiles import StaticFiles
 
 import pandas as pd
 import io, os, csv, traceback, json
+import numpy as np
 import re
 from urllib.parse import unquote
 
@@ -110,6 +111,66 @@ def save_upload_limits(data):
     with open(UPLOAD_LIMIT_FILE, "w") as f:
         json.dump(data, f)
 
+def _safe_decode(contents: bytes) -> str:
+    return contents.decode("utf-8", errors="ignore")
+
+
+def _normalize_headers(columns: pd.Index) -> list[str]:
+    normalized = []
+    for idx, column in enumerate(columns, start=1):
+        cleaned = str(column).strip().lower().replace(" ", "_")
+        normalized.append(cleaned or f"column_{idx}")
+    return normalized
+
+
+def _dedupe_headers(headers: list[str]) -> list[str]:
+    seen = {}
+    deduped = []
+    for header in headers:
+        if header not in seen:
+            seen[header] = 1
+            deduped.append(header)
+            continue
+        seen[header] += 1
+        deduped.append(f"{header}_{seen[header]}")
+    return deduped
+
+
+def _convert_to_csv_dataframe(contents: bytes, filename: str) -> pd.DataFrame:
+    extension = Path(filename).suffix.lower()
+    if extension == ".csv":
+        df = pd.read_csv(io.StringIO(_safe_decode(contents)))
+    elif extension == ".json":
+        text = _safe_decode(contents)
+        try:
+            df = pd.read_json(io.StringIO(text))
+        except ValueError:
+            df = pd.read_json(io.StringIO(text), lines=True)
+    elif extension in {".xls", ".xlsx"}:
+        df = pd.read_excel(io.BytesIO(contents))
+    else:
+        raise ValueError("Unsupported file format.")
+
+    csv_buffer = io.StringIO()
+    df.to_csv(csv_buffer, index=False)
+    csv_buffer.seek(0)
+    return pd.read_csv(csv_buffer)
+
+
+def _clean_and_validate(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.replace([np.inf, -np.inf], pd.NA)
+    df = df.dropna(how="all")
+    df.columns = _dedupe_headers(_normalize_headers(df.columns))
+    df = df.dropna(axis=1, how="all")
+
+    if df.shape[1] == 0:
+        raise ValueError("No columns found.")
+    if df.shape[0] == 0:
+        raise ValueError("No rows found.")
+    return df.reset_index(drop=True)
+
+
+
 # ==================================================
 # CSV UPLOAD ENDPOINT
 # ==================================================
@@ -134,15 +195,14 @@ async def upload_csv(
         )
 
     filename = file.filename or "upload.csv"
-    if not filename.lower().endswith(".csv"):
-        raise HTTPException(status_code=400, detail="Only CSV files allowed")
-
     contents = await file.read()
 
     try:
-        df = pd.read_csv(io.StringIO(contents.decode("utf-8", errors="ignore")))
+        df = _convert_to_csv_dataframe(contents, filename)
+        df = _clean_and_validate(df)
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid CSV file")
+
 
     # clean + process
     df = clean_dataset(df)
@@ -158,6 +218,7 @@ async def upload_csv(
     return {
         "filename": filename,
         "rows": len(df),
+        "message": "Filr converted to  CSV and ready for processing,",
         "data": df.fillna("").astype(str).to_dict(orient="records")
     }
 

@@ -84,7 +84,7 @@
             <div class="upload-container">
               <div class="upload-header">
                 <h1>Upload Your Data</h1>
-                <p>Import a CSV file to get started with AI-powered analysis</p>
+                <p>Import a CSV, JSON, or Excel file to get started with AI-powered analysis</p>
               </div>
         
               <div class="upload-card">        
@@ -94,11 +94,11 @@
                 </div>
         
                 <div class="drop-zone" id="dropZone">
-                  <input type="file" id="fileInput" accept=".csv" hidden />
+                  <input type="file" id="fileInput" accept=".csv, .json, .xls, .xlsx" hidden />
         
                   <div id="idleState">
                     <i class="bi bi-upload upload-icon"></i>
-                    <p><strong>Drop your CSV file here</strong></p>
+                    <p><strong>Drop your Data file here</strong></p>
                     <p class="muted">or click to browse</p>
                   </div>
         
@@ -143,7 +143,7 @@
           <div class="card text-center">
             <i class="bi bi-file-earmark-spreadsheet empty-icon"></i>
             <h2>No Data Available</h2>
-            <p>Upload a CSV file to view data tables</p>
+            <p>Upload a Data file to view data tables</p>
             <button class="btn btn-primary" onclick="showSection('upload')">
               <i class="bi bi-upload"></i> Upload Data
             </button>
@@ -163,7 +163,7 @@
           <div class="card text-center">
             <i class="bi bi-file-earmark-spreadsheet empty-icon"></i>
             <h2>No Data Available</h2>
-            <p>Upload a CSV file to view full dataset</p>
+            <p>Upload a Data file to view full dataset</p>
             <button class="btn btn-primary" onclick="showSection('upload')">
               <i class="bi bi-upload"></i> Upload Data
             </button>
@@ -197,7 +197,7 @@
           <div class="card text-center">
             <i class="bi bi-file-earmark-spreadsheet empty-icon"></i>
             <h2>No Data Available</h2>
-            <p>Upload a CSV file to view charts</p>
+            <p>Upload a Data file to view charts</p>
             <button class="btn btn-primary" onclick="showSection('upload')">
               <i class="bi bi-upload"></i> Upload Data
             </button>
@@ -211,8 +211,6 @@
 
       </section>
 
-      
-
       <section id="custom" class="section page hidden">
 
         <!-- EMPTY STATE -->
@@ -220,7 +218,7 @@
           <div class="card text-center">
             <i class="bi bi-file-earmark-spreadsheet empty-icon"></i>
             <h2>No Data Available</h2>
-            <p>Upload a CSV file to view charts</p>
+            <p>Upload a Data file to view custom</p>
             <button class="btn btn-primary" onclick="showSection('upload')">
               <i class="bi bi-upload"></i> Upload Data
             </button>
@@ -254,9 +252,6 @@
         </div>
       
       </section>
-      
-
-
 
       <section id="chatbot" class="section page hidden">
 
@@ -264,7 +259,7 @@
           <div class="card text-center">
             <i class="bi bi-file-earmark-spreadsheet empty-icon"></i>
             <h2>No Data Available</h2>
-            <p>Upload a CSV file to see your dashboard</p>
+            <p>Upload a Data file to see your Chatbot</p>
             <button class="btn btn-primary" onclick="showSection('upload')">
               <i class="bi bi-upload"></i> Upload Data
             </button>
